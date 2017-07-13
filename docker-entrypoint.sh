@@ -11,7 +11,7 @@ randname() {
 }
 
 create_user_from_directory_owner() {
-    if [ $MODE = "dev" ]; then
+    if [ "$MODE" = "dev" ]; then
         owner=www-data
         group=www-data
     else
