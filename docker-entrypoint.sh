@@ -23,7 +23,11 @@ create_user_from_directory_owner() {
         fi
 
         local owner group owner_id group_id path
-        path=$1
+	if [ "$HOME" = "" ]; then
+            path=$1
+        else
+            path=$HOME
+        fi
 
         owner=$(stat -c '%U' $path)
         group=$(stat -c '%G' $path)
@@ -76,7 +80,7 @@ EOF
 }
 
 
-create_user_from_directory_owner "/usr/local/apache2/htdocs"
+create_user_from_directory_owner "/var/www/html"
 
 
 exec "$@"
