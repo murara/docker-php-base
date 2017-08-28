@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:5.6-apache
 
 RUN set -ex; \
 	\
@@ -21,4 +21,4 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 WORKDIR /var/www/html
 
 ENTRYPOINT ["sh","/docker-entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
