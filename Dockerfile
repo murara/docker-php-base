@@ -19,8 +19,10 @@ RUN set -ex; \
 	; \
 	apt-get autoremove -y; \
 	rm -rf /var/lib/apt/lists/*; \
-	apt-get clean
+	apt-get clean; \
+	a2enmod actions rewrite
 
+COPY config/www.conf /etc/apache2/conf-enabled/www.conf
 COPY config/php.ini /usr/local/etc/php/php.ini
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
