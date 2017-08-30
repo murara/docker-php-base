@@ -23,12 +23,6 @@ create_user_from_directory_owner() {
         fi
 
         local owner group owner_id group_id path
-	if [ "$HOME" = "" ]; then
-            path=$1
-        else
-            path=$HOME
-        fi
-
         owner=$(stat -c '%U' $path)
         group=$(stat -c '%G' $path)
         owner_id=$(stat -c '%u' $path)
@@ -43,33 +37,6 @@ create_user_from_directory_owner() {
             adduser --no-create-home --system --uid=$owner_id --gid=$group_id "$owner" > /dev/null
             echo "[Apache User] Created user for uid ($owner_id), and named it '$owner'"
         fi
-
-        cat << EOF > /usr/local/etc/php-fpm.conf
-[global]
-
-error_log = /proc/self/fd/2
-daemonize = no
-
-[www]
-; if we send this to /proc/self/fd/1, it never appears
-access.log = /proc/self/fd/2
-
-user = $owner
-group = $group
-
-listen = [::]:9000
-
-pm = ondemand
-pm.max_children = 1024
-pm.process_idle_timeout = 10s
-pm.start_servers = 5
-
-clear_env = no
-
-; Ensure worker stdout and stderr are sent to the main error log.
-catch_workers_output = yes
-EOF
-
     fi
 
     export APACHE_RUN_USER=$owner
