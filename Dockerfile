@@ -7,7 +7,6 @@ RUN set -ex; \
 		libjpeg-dev \
 		libpng12-dev \
 		libxml2-dev \
-		libcurl4-gnutls-dev \
 		libcurl4-openssl-dev \
 	; \
 	apt-get autoremove -y; \
