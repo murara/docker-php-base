@@ -8,7 +8,6 @@ RUN set -ex; \
 		libpng12-dev \
 		libxml2-dev \
 		libpq-dev \
-		libcurl4-gnutls-dev \
 		libcurl4-openssl-dev \
 	; \
 	apt-get autoremove -y; \
