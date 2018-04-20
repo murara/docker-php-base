@@ -1,25 +1,10 @@
-FROM php:7.1-fpm
+FROM murara/php-base:7.1-dev
 
-RUN set -ex; \
-	\
-	apt-get update; \
-	apt-get install -y \
-		libjpeg-dev \
-		libpng12-dev \
-		libxml2-dev \
-		libcurl4-openssl-dev \
-	; \
-	apt-get autoremove -y; \
-	rm -rf /var/lib/apt/lists/*; \
-	apt-get clean; \
-	\
-	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysqli opcache curl
+RUN docker-php-ext-install zip; \
+    cd /opt; \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
+    php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"; \
+    php composer-setup.php --filename=composer --install-dir=/usr/local/bin; \
+    php -r "unlink('composer-setup.php');"; \
+    composer global require "laravel/installer"
 
-COPY config/php.ini /usr/local/etc/php/php.ini
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-
-WORKDIR /var/www/html
-
-ENTRYPOINT ["sh","/docker-entrypoint.sh"]
-CMD ["php-fpm"]
