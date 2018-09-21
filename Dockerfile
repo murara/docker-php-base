@@ -9,6 +9,9 @@ RUN set -ex; \
 		libxml2-dev \
 		libcurl4-openssl-dev \
 		locales \
+		zip \
+		unzip \
+		nano \
 	; \
 	apt-get autoremove -y; \
 	rm -rf /var/lib/apt/lists/*; \
