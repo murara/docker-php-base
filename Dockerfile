@@ -1,4 +1,4 @@
-FROM murara/php-base:7.1-dev
+FROM murara/php-base:7.1
 
 RUN docker-php-ext-install zip; \
     cd /opt; \
