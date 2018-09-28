@@ -8,3 +8,5 @@ RUN docker-php-ext-install zip; \
     php -r "unlink('composer-setup.php');"; \
     composer global require "laravel/installer"
 
+COPY config/php.ini /usr/local/etc/php/php.ini
+
