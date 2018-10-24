@@ -16,7 +16,9 @@ RUN set -ex; \
 	apt-get autoremove -y; \
 	rm -rf /var/lib/apt/lists/*; \
 	apt-get clean; \
-	\
+	printf "\n" | pecl install redis; \
+	printf "\n" | pecl install timezonedb ; \
+	docker-php-ext-enable redis timezonedb; \
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
 	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysqli opcache curl zip
 
