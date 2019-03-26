@@ -20,13 +20,13 @@ RUN set -ex; \
 	printf "\n" | pecl install timezonedb ; \
 	docker-php-ext-enable redis timezonedb; \
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysqli opcache curl zip
+	docker-php-ext-install bcmath pdo pdo_mysql mbstring tokenizer xml gd mysqli opcache curl zip
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     sed -i -e 's/# pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
-ENV LANG pt_BR.UTF-8  
-ENV LANGUAGE pt_BR:pt  
+ENV LANG pt_BR.UTF-8
+ENV LANGUAGE pt_BR:pt
 ENV LC_ALL pt_BR.UTF-8
 
 COPY config/php.ini /usr/local/etc/php/php.ini
