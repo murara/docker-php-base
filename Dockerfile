@@ -2,12 +2,15 @@ FROM php:5.6-apache
 
 RUN set -ex; \
 	\
+  mkdir -p /usr/share/man/man1; \
+  mkdir -p /usr/share/man/man7; \
 	apt-get update; \
 	apt-get install -y \
 		libjpeg-dev \
 		libpng-dev \
 		libxml2-dev \
-		libpq-dev \
+    libpq-dev \
+    postgresql-client-9.6 \
 	; \
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
 	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysql mysqli opcache pgsql pdo_pgsql; \
