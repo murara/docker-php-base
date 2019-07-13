@@ -5,7 +5,7 @@ RUN set -ex; \
 	apt-get update; \
 	apt-get install -y \
 		libjpeg-dev \
-		libpng12-dev \
+		libpng-dev \
 		libxml2-dev \
 		libpq-dev \
 	; \
