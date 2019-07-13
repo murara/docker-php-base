@@ -13,7 +13,7 @@ RUN set -ex; \
 	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysql mysqli opcache pgsql pdo_pgsql; \
 	apt-get remove -y \
 		libjpeg-dev \
-		libpng12-dev \
+		libpng-dev \
 		libxml2-dev \
 		libpq-dev \
 	; \
