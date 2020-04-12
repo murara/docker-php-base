@@ -13,7 +13,7 @@ RUN set -ex; \
     postgresql-client-9.6 \
 	; \
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysql mysqli opcache pgsql pdo_pgsql; \
+	docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd mysql mysqli opcache pgsql pdo_pgsql zip; \
 	apt-get remove -y \
 		libjpeg-dev \
 		libpng-dev \
